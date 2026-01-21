@@ -1,0 +1,135 @@
+---
+export interface Props {
+  name: string;
+  price: number;
+  image: string;
+  description?: string;
+  size?: 'large' | 'medium' | 'small';
+}
+
+const { name, price, image, description, size = 'medium' } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
+---
+
+<article class:list={['product-card', `product-card--${size}`]}>
+  <div class="product-image">
+    <img src={image} alt={name} loading="lazy" />
+  </div>
+  <div class="product-info">
+    <h3 class="product-name">{name}</h3>
+    <p class="product-price">
+      {formattedPrice} <span class="price-currency">₽</span>
+    </p>
+    {description && (
+      <p class="product-description">{description}</p>
+    )}
+  </div>
+</article>
+
+<style>
+  .product-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .product-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background-color: var(--bg-tertiary);
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-info {
+    padding: var(--space-md);
+  }
+
+  .product-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+  }
+
+  .product-price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .price-currency {
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  .product-description {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: var(--space-sm);
+    line-height: 1.5;
+  }
+
+  /* Size variants */
+  .product-card--large {
+    grid-column: span 2;
+  }
+
+  .product-card--large .product-image {
+    aspect-ratio: 16/10;
+  }
+
+  .product-card--large .product-name {
+    font-size: 1.25rem;
+  }
+
+  .product-card--large .product-price {
+    font-size: 1.5rem;
+  }
+
+  .product-card--large .product-info {
+    padding: var(--space-lg);
+  }
+
+  .product-card--small .product-image {
+    aspect-ratio: 1;
+  }
+
+  .product-card--small .product-name {
+    font-size: 0.9rem;
+  }
+
+  .product-card--small .product-price {
+    font-size: 1rem;
+  }
+
+  .product-card--small .product-info {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  @media (max-width: 480px) {
+    .product-card--large {
+      grid-column: span 1;
+    }
+
+    .product-card--large .product-image {
+      aspect-ratio: 1;
+    }
+  }
+</style>

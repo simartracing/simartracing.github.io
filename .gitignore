@@ -22,3 +22,12 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# claude code
+.claude/
+
+# temp scripts
+crop_images.sh
+
+# source screenshots
+.ignore/

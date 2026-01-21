@@ -1,0 +1,120 @@
+---
+const avitoUrl = 'https://www.avito.ru/user/d5b94ba62bb9ddd7cc84e3aae3cfec7a/profile';
+---
+
+<section class="avito-section">
+  <div class="avito-card">
+    <div class="avito-icon">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="24" r="24" fill="#00AAFF"/>
+        <path d="M24 12L27.5 19.5L36 20.5L30 26.5L31.5 35L24 31L16.5 35L18 26.5L12 20.5L20.5 19.5L24 12Z" fill="white"/>
+      </svg>
+    </div>
+
+    <div class="avito-content">
+      <div class="avito-rating">
+        <span class="rating-value">5.0</span>
+        <div class="rating-stars">
+          {[1, 2, 3, 4, 5].map(() => (
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="#FFB800">
+              <path d="M10 1L12.5 6.5L18.5 7.5L14.25 11.5L15.5 17.5L10 14.5L4.5 17.5L5.75 11.5L1.5 7.5L7.5 6.5L10 1Z"/>
+            </svg>
+          ))}
+        </div>
+      </div>
+
+      <p class="avito-reviews">735 отзывов на Avito</p>
+      <p class="avito-since">Продавец с 2013 года</p>
+    </div>
+
+    <a
+      href={avitoUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="avito-link"
+    >
+      Смотреть отзывы
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" fill="none"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .avito-section {
+    padding: var(--space-2xl) 0;
+  }
+
+  .avito-card {
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xl);
+    border: 1px solid var(--border);
+  }
+
+  .avito-icon {
+    flex-shrink: 0;
+  }
+
+  .avito-content {
+    flex-grow: 1;
+  }
+
+  .avito-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+  }
+
+  .rating-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .rating-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .avito-reviews {
+    color: var(--text-primary);
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+  }
+
+  .avito-since {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  .avito-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    color: var(--accent);
+    font-weight: 500;
+    transition: color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .avito-link:hover {
+    color: var(--accent-hover);
+  }
+
+  @media (max-width: 768px) {
+    .avito-card {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .avito-rating {
+      justify-content: center;
+    }
+  }
+</style>

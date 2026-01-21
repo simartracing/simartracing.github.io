@@ -1,16 +1,147 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Divider from '../components/Divider.astro';
+import AvitoRating from '../components/AvitoRating.astro';
+import TelegramCTA from '../components/TelegramCTA.astro';
+import { cockpits, accessories } from '../data/products';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Кокпиты для симрейсинга">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1 class="hero-title">Кокпиты для симрейсинга</h1>
+      <p class="hero-subtitle">
+        Изготавливаем прочные и эргономичные кокпиты в Москве.
+        Индивидуальный подход к каждому заказу.
+      </p>
+    </div>
+  </section>
+
+  <!-- Products Grid -->
+  <section class="products section">
+    <div class="container">
+      <div class="products-grid">
+        <!-- Кокпит Basic -->
+        <ProductCard
+          name={cockpits[0].name}
+          price={cockpits[0].price}
+          image={cockpits[0].image}
+          description={cockpits[0].description}
+          size="large"
+        />
+
+        <!-- Два аксессуара рядом -->
+        <ProductCard
+          name={accessories[0].name}
+          price={accessories[0].price}
+          image={accessories[0].image}
+          description={accessories[0].description}
+          size="small"
+        />
+        <ProductCard
+          name={accessories[1].name}
+          price={accessories[1].price}
+          image={accessories[1].image}
+          description={accessories[1].description}
+          size="small"
+        />
+
+        <Divider text="Стандартная комплектация" />
+
+        <!-- Кокпит Standard -->
+        <ProductCard
+          name={cockpits[1].name}
+          price={cockpits[1].price}
+          image={cockpits[1].image}
+          description={cockpits[1].description}
+          size="large"
+        />
+
+        <!-- Три аксессуара -->
+        <ProductCard
+          name={accessories[2].name}
+          price={accessories[2].price}
+          image={accessories[2].image}
+          description={accessories[2].description}
+          size="medium"
+        />
+        <ProductCard
+          name={accessories[3].name}
+          price={accessories[3].price}
+          image={accessories[3].image}
+          description={accessories[3].description}
+          size="medium"
+        />
+
+        <Divider text="Топовая версия" />
+
+        <!-- Кокпит Pro -->
+        <ProductCard
+          name={cockpits[2].name}
+          price={cockpits[2].price}
+          image={cockpits[2].image}
+          description={cockpits[2].description}
+          size="large"
+        />
+
+        <!-- Остальные аксессуары -->
+        {accessories.slice(4).map((product, index) => (
+          <ProductCard
+            name={product.name}
+            price={product.price}
+            image={product.image}
+            description={product.description}
+            size={index % 3 === 0 ? 'medium' : 'small'}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Avito Rating -->
+  <section class="container">
+    <AvitoRating />
+  </section>
+
+  <!-- Telegram CTA -->
+  <section class="container">
+    <TelegramCTA />
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: var(--space-3xl) 0;
+    text-align: center;
+    background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    margin-bottom: var(--space-md);
+    background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-subtitle {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+  }
+</style>

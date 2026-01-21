@@ -1,0 +1,94 @@
+---
+export interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  title = 'Готовы обсудить ваш заказ?',
+  subtitle = 'Напишите в Telegram — Андрей ответит на все вопросы и поможет подобрать оптимальную конфигурацию.'
+} = Astro.props;
+---
+
+<section class="cta-section">
+  <div class="cta-card">
+    <h2 class="cta-title">{title}</h2>
+    <p class="cta-subtitle">{subtitle}</p>
+
+    <a
+      href="https://t.me/andrewcherkovets"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="cta-button"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8-3.44 3.82-1.6 4.62-1.88 5.13-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z"/>
+      </svg>
+      Написать в Telegram
+    </a>
+
+    <p class="cta-note">Индивидуальный подход к каждому заказу</p>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    padding: var(--space-3xl) 0;
+  }
+
+  .cta-card {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3xl);
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+    margin-bottom: var(--space-md);
+    color: var(--text-primary);
+  }
+
+  .cta-subtitle {
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto var(--space-xl);
+    line-height: 1.6;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background-color: var(--accent);
+    color: white;
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    font-size: 1.125rem;
+    transition: all 0.2s ease;
+  }
+
+  .cta-button:hover {
+    background-color: var(--accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+  }
+
+  .cta-note {
+    margin-top: var(--space-lg);
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .cta-card {
+      padding: var(--space-xl);
+    }
+
+    .cta-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

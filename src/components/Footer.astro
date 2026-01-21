@@ -1,0 +1,113 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <span class="footer-logo">Sim Art</span>
+      <p class="footer-tagline">Кокпиты для симрейсинга ручной работы</p>
+    </div>
+
+    <nav class="footer-nav">
+      <a href="/timing">Сроки</a>
+      <a href="/payment">Оплата</a>
+      <a href="/delivery">Доставка</a>
+      <a href="/assembly">Сборка</a>
+    </nav>
+
+    <div class="footer-contact">
+      <a
+        href="https://t.me/andrewcherkovets"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-telegram"
+      >
+        Telegram: @andrewcherkovets
+      </a>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {currentYear} Sim Art. Москва</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    padding: var(--space-2xl) 0;
+    margin-top: var(--space-3xl);
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .footer-logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .footer-tagline {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: var(--space-xs);
+  }
+
+  .footer-nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .footer-nav a {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-nav a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-telegram {
+    color: var(--accent);
+    font-size: 0.9rem;
+    transition: color 0.2s ease;
+  }
+
+  .footer-telegram:hover {
+    color: var(--accent-hover);
+  }
+
+  .footer-bottom {
+    grid-column: 1 / -1;
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--border);
+    margin-top: var(--space-lg);
+  }
+
+  .footer-bottom p {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .footer-nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+  }
+</style>
