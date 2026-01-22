@@ -3,6 +3,5 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://roboxdev.github.io',
-  base: '/simart',
+  site: 'https://simartracing.github.io',
 });
