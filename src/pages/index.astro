@@ -23,7 +23,7 @@ import { cockpits, accessories } from '../data/products';
     <div class="container">
       <div class="showcase">
         <!-- Кокпит Pro (2×2) -->
-        <div class="cell-cockpit" style="grid-area: c1;">
+        <div class="cell cell-c1">
           <ProductCard
             name={cockpits[0].name}
             price={cockpits[0].price}
@@ -34,15 +34,15 @@ import { cockpits, accessories } from '../data/products';
         </div>
 
         <!-- Аксессуары 1-2 (справа от Pro, row 1) -->
-        <div class="cell-accessory" style="grid-area: a1;">
+        <div class="cell cell-a1">
           <ProductCard {...accessories[0]} size="small" />
         </div>
-        <div class="cell-accessory" style="grid-area: a2;">
+        <div class="cell cell-a2">
           <ProductCard {...accessories[1]} size="small" />
         </div>
 
         <!-- Кокпит Standard (2×2, row 2-3 справа) -->
-        <div class="cell-cockpit" style="grid-area: c2;">
+        <div class="cell cell-c2">
           <ProductCard
             name={cockpits[1].name}
             price={cockpits[1].price}
@@ -53,15 +53,15 @@ import { cockpits, accessories } from '../data/products';
         </div>
 
         <!-- Аксессуары 3-4 (слева от Standard, row 3) -->
-        <div class="cell-accessory" style="grid-area: a3;">
+        <div class="cell cell-a3">
           <ProductCard {...accessories[2]} size="small" />
         </div>
-        <div class="cell-accessory" style="grid-area: a4;">
+        <div class="cell cell-a4">
           <ProductCard {...accessories[3]} size="small" />
         </div>
 
         <!-- Кокпит Basic (2×2, row 4-5 слева) -->
-        <div class="cell-cockpit" style="grid-area: c3;">
+        <div class="cell cell-c3">
           <ProductCard
             name={cockpits[2].name}
             price={cockpits[2].price}
@@ -72,22 +72,22 @@ import { cockpits, accessories } from '../data/products';
         </div>
 
         <!-- Аксессуары 5-8 (справа от Basic, row 4-5) -->
-        <div class="cell-accessory" style="grid-area: a5;">
+        <div class="cell cell-a5">
           <ProductCard {...accessories[4]} size="small" />
         </div>
-        <div class="cell-accessory" style="grid-area: a6;">
+        <div class="cell cell-a6">
           <ProductCard {...accessories[5]} size="small" />
         </div>
-        <div class="cell-accessory" style="grid-area: a7;">
+        <div class="cell cell-a7">
           <ProductCard {...accessories[6]} size="small" />
         </div>
-        <div class="cell-accessory" style="grid-area: a8;">
+        <div class="cell cell-a8">
           <ProductCard {...accessories[7]} size="small" />
         </div>
 
         <!-- Оставшиеся аксессуары -->
         {accessories.slice(8).map((acc) => (
-          <div class="cell-accessory cell-remaining">
+          <div class="cell cell-remaining">
             <ProductCard {...acc} size="small" />
           </div>
         ))}
@@ -143,47 +143,61 @@ import { cockpits, accessories } from '../data/products';
     gap: var(--space-md);
   }
 
-  .cell-cockpit {
-    min-height: 400px;
-  }
+  /* Grid areas для десктопа */
+  .cell-c1 { grid-area: c1; }
+  .cell-c2 { grid-area: c2; }
+  .cell-c3 { grid-area: c3; }
+  .cell-a1 { grid-area: a1; }
+  .cell-a2 { grid-area: a2; }
+  .cell-a3 { grid-area: a3; }
+  .cell-a4 { grid-area: a4; }
+  .cell-a5 { grid-area: a5; }
+  .cell-a6 { grid-area: a6; }
+  .cell-a7 { grid-area: a7; }
+  .cell-a8 { grid-area: a8; }
 
-  .cell-remaining {
-    grid-area: auto;
+  .cell-c1,
+  .cell-c2,
+  .cell-c3 {
+    min-height: 400px;
   }
 
   /* Мобильная версия: сначала кокпиты, потом аксессуары */
   @media (max-width: 900px) {
     .showcase {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-md);
-    }
-
-    .cell-cockpit {
-      order: -1;
-      min-height: auto;
-    }
-
-    .cell-accessory {
-      order: 10;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .showcase {
-      display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-areas: none;
     }
 
-    .cell-cockpit {
-      grid-column: span 2;
-      order: -1;
+    .cell {
+      grid-area: auto;
     }
 
-    .cell-accessory {
+    .cell-c1,
+    .cell-c2,
+    .cell-c3 {
+      grid-column: span 2;
+      order: -1;
+      min-height: auto;
+    }
+
+    .cell-a1, .cell-a2, .cell-a3, .cell-a4,
+    .cell-a5, .cell-a6, .cell-a7, .cell-a8,
+    .cell-remaining {
       grid-column: span 1;
       order: 10;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .showcase {
+      grid-template-columns: 1fr;
+    }
+
+    .cell-c1,
+    .cell-c2,
+    .cell-c3 {
+      grid-column: span 1;
     }
   }
 
