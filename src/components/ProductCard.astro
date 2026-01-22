@@ -88,19 +88,22 @@ const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
 
   /* Size variants */
   .product-card--large {
-    grid-column: span 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   .product-card--large .product-image {
-    aspect-ratio: 16/10;
+    flex: 1;
+    aspect-ratio: auto;
   }
 
   .product-card--large .product-name {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 
   .product-card--large .product-price {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 
   .product-card--large .product-info {
@@ -112,24 +115,18 @@ const formattedPrice = new Intl.NumberFormat('ru-RU').format(price);
   }
 
   .product-card--small .product-name {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
   }
 
   .product-card--small .product-price {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .product-card--small .product-info {
     padding: var(--space-sm) var(--space-md);
   }
 
-  @media (max-width: 480px) {
-    .product-card--large {
-      grid-column: span 1;
-    }
-
-    .product-card--large .product-image {
-      aspect-ratio: 1;
-    }
+  .product-card--small .product-description {
+    display: none;
   }
 </style>

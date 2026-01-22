@@ -10,11 +10,11 @@ export interface Product {
 
 export const cockpits: Product[] = [
   {
-    id: 'basic',
-    name: 'Sim Art Basic',
-    price: 53000,
-    image: '/images/cockpits/basic.png',
-    description: 'Начальная модель для комфортного симрейсинга. Прочная конструкция, регулировка под любой рост.',
+    id: 'pro',
+    name: 'Sim Art Pro',
+    price: 73000,
+    image: '/images/cockpits/pro.png',
+    description: 'Топовая модель для серьёзных симрейсеров. Максимальная жёсткость, премиальные материалы.',
     category: 'cockpit',
     size: 'large',
   },
@@ -28,11 +28,11 @@ export const cockpits: Product[] = [
     size: 'large',
   },
   {
-    id: 'pro',
-    name: 'Sim Art Pro',
-    price: 73000,
-    image: '/images/cockpits/pro.png',
-    description: 'Топовая модель для серьёзных симрейсеров. Максимальная жёсткость, премиальные материалы.',
+    id: 'basic',
+    name: 'Sim Art Basic',
+    price: 53000,
+    image: '/images/cockpits/basic.png',
+    description: 'Начальная модель для комфортного симрейсинга. Прочная конструкция, регулировка под любой рост.',
     category: 'cockpit',
     size: 'large',
   },
