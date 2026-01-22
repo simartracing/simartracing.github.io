@@ -15,7 +15,7 @@ const currentPath = Astro.url.pathname;
       <span class="logo-text">Sim Art</span>
     </a>
 
-    <nav class="nav">
+    <nav class="nav nav-desktop">
       {navItems.map(item => (
         <a
           href={item.href}
@@ -30,7 +30,7 @@ const currentPath = Astro.url.pathname;
       href="https://t.me/andrewcherkovets"
       target="_blank"
       rel="noopener noreferrer"
-      class="btn btn-primary telegram-btn"
+      class="btn btn-primary telegram-btn telegram-desktop"
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8-3.44 3.82-1.6 4.62-1.88 5.13-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z"/>
@@ -38,13 +38,55 @@ const currentPath = Astro.url.pathname;
       Написать
     </a>
 
-    <button class="mobile-menu-btn" aria-label="Открыть меню">
+    <button class="mobile-menu-btn" aria-label="Открыть меню" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
     </button>
   </div>
+
+  <!-- Мобильное меню -->
+  <nav class="nav-mobile">
+    {navItems.map(item => (
+      <a
+        href={item.href}
+        class:list={['nav-mobile-link', { active: currentPath === item.href }]}
+      >
+        {item.label}
+      </a>
+    ))}
+    <a
+      href="https://t.me/andrewcherkovets"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn btn-primary telegram-mobile"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69.01-.03.01-.14-.07-.2-.08-.06-.19-.04-.27-.02-.12.03-1.99 1.27-5.62 3.72-.53.36-1.01.54-1.44.53-.47-.01-1.38-.27-2.06-.49-.83-.27-1.49-.42-1.43-.88.03-.24.37-.49 1.02-.74 3.99-1.74 6.66-2.89 8-3.44 3.82-1.6 4.62-1.88 5.13-1.89.11 0 .37.03.54.17.14.12.18.28.2.45-.02.07-.02.14-.04.22z"/>
+      </svg>
+      Написать в Telegram
+    </a>
+  </nav>
 </header>
+
+<script>
+  const menuBtn = document.querySelector('.mobile-menu-btn');
+  const mobileNav = document.querySelector('.nav-mobile');
+  const header = document.querySelector('.header');
+
+  menuBtn?.addEventListener('click', () => {
+    const isOpen = header?.classList.toggle('menu-open');
+    menuBtn.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Закрыть меню при клике на ссылку
+  mobileNav?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      header?.classList.remove('menu-open');
+      menuBtn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 
 <style>
   .header {
@@ -56,14 +98,13 @@ const currentPath = Astro.url.pathname;
     background-color: rgba(10, 10, 10, 0.95);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--border);
-    height: var(--header-height);
   }
 
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: var(--header-height);
     gap: var(--space-lg);
   }
 
@@ -80,7 +121,7 @@ const currentPath = Astro.url.pathname;
     letter-spacing: -0.02em;
   }
 
-  .nav {
+  .nav-desktop {
     display: flex;
     align-items: center;
     gap: var(--space-lg);
@@ -97,31 +138,77 @@ const currentPath = Astro.url.pathname;
     color: var(--text-primary);
   }
 
-  .telegram-btn {
+  .telegram-desktop {
     font-size: 0.9rem;
   }
 
   .mobile-menu-btn {
     display: none;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     padding: var(--space-sm);
+    cursor: pointer;
   }
 
   .mobile-menu-btn span {
     display: block;
-    width: 20px;
+    width: 24px;
     height: 2px;
     background-color: var(--text-primary);
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    transform-origin: center;
+  }
+
+  /* Мобильное меню */
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    padding: var(--space-lg);
+    gap: var(--space-md);
+    border-top: 1px solid var(--border);
+    background-color: rgba(10, 10, 10, 0.98);
+  }
+
+  .nav-mobile-link {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    padding: var(--space-sm) 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-mobile-link:hover,
+  .nav-mobile-link.active {
+    color: var(--text-primary);
+  }
+
+  .telegram-mobile {
+    margin-top: var(--space-sm);
+    justify-content: center;
+  }
+
+  /* Открытое состояние */
+  .header.menu-open .nav-mobile {
+    display: flex;
+  }
+
+  .header.menu-open .mobile-menu-btn span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .header.menu-open .mobile-menu-btn span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .header.menu-open .mobile-menu-btn span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
   }
 
   @media (max-width: 768px) {
-    .nav {
+    .nav-desktop {
       display: none;
     }
 
-    .telegram-btn {
+    .telegram-desktop {
       display: none;
     }
 
